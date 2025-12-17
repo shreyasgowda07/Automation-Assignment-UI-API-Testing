@@ -101,8 +101,8 @@ At a high level, the framework is a small test system with clear layers:
 ```mermaid
 flowchart LR
   subgraph Runner[Playwright Test Runner]
-    TUI[UI Specs<br/>tests/ui/*]
-    TAPI[API Specs<br/>tests/api/*]
+    TUI[UI Specs (tests/ui/*)]
+    TAPI[API Specs (tests/api/*)]
   end
 
   subgraph UI[UI Layer]
@@ -113,16 +113,16 @@ flowchart LR
   end
 
   subgraph API[API Layer]
-    Client[ApiClient.ts<br/>(Axios wrapper)]
+    Client[ApiClient.ts (Axios wrapper)]
   end
 
   subgraph Config[Configuration]
-    Env[.env<br/>UI_BASE_URL, API_BASE_URL, creds, token]
+    Env[.env (UI_BASE_URL, API_BASE_URL, creds, token)]
     PWCfg[playwright.config.ts]
   end
 
   subgraph Target[Automation Anywhere Cloud]
-    UIApp[Web UI<br/>(Community Edition)]
+    UIApp[Web UI (Community Edition)]
     REST[Learning Instance APIs]
   end
 
