@@ -58,32 +58,33 @@ You must register your own Community Edition account and use your own credential
 Conceptual view of how the pieces fit together:
 
 ```mermaid
-mindmap
-  root((AA Automation Framework))
-    UI Automation
-      Playwright Test Runner
-      tests/ui/messagebox.spec.ts
-      tests/ui/form.spec.ts
-      Page Objects
-        LoginPage
-        MessageBoxPage
-        FormPage
-        BasePage
-    API Automation
-      tests/api/learningInstance.spec.ts
-      ApiClient (Axios wrapper)
-    Configuration
-      .env
-        UI_BASE_URL
-        UI_USERNAME
-        UI_PASSWORD
-        API_BASE_URL
-        API_TOKEN
-      playwright.config.ts
-      test-config.js
-    Reports
-      playwright-report
-      test-results
+flowchart TD
+  Root[AA Automation Framework]
+
+  Root --> UI[UI Automation]
+  Root --> API[API Automation]
+  Root --> CFG[Configuration]
+  Root --> RPT[Reports]
+
+  UI --> UITests[UI tests (tests/ui)]
+  UITests --> MsgSpec[messagebox.spec.ts]
+  UITests --> FormSpec[form.spec.ts]
+  UI --> Pages[Page Objects (src/pages)]
+  Pages --> Login[LoginPage]
+  Pages --> MsgPage[MessageBoxPage]
+  Pages --> FormPage[FormPage]
+  Pages --> Base[BasePage]
+
+  API --> APITests[API tests (tests/api)]
+  APITests --> LearnSpec[learningInstance.spec.ts]
+  API --> ApiClientNode[ApiClient (src/api/apiClient.ts)]
+
+  CFG --> EnvFile[.env (URLs, creds, token)]
+  CFG --> PWConfig[playwright.config.ts]
+  CFG --> TestCfg[test-config.js]
+
+  RPT --> PWReport[playwright-report]
+  RPT --> TR[test-results]
 ```
 
 Reading this from the center out:
@@ -173,25 +174,25 @@ flowchart LR
      - `API_BASE_URL`, `API_TOKEN`
 3. **Install Node.js** (if not already installed)
    - **macOS (example)**:
-     ```bash
-     brew install node
-     ```
+```bash
+brew install node
+```
    - **Windows (example)**:
      - Install **Node.js LTS** from the official website (`https://nodejs.org`).
      - During installation, allow it to add Node and npm to your `PATH`.
 4. **Install project dependencies and Playwright browsers**
    - macOS / Linux:
-     ```bash
-     cd "/Users/manjunathkg/Documents/Source Code/Automation Assignment – UI & API Testing"
-     npm install
+```bash
+cd "/Users/manjunathkg/Documents/Source Code/Automation Assignment – UI & API Testing"
+npm install
      npx playwright install
      ```
    - Windows (PowerShell or Command Prompt):
      ```bash
      cd "C:\path\to\Automation Assignment – UI & API Testing"
      npm install
-     npx playwright install
-     ```
+npx playwright install
+```
 
 ### Local-only npm usage (no global installs required)
 
@@ -210,13 +211,13 @@ flowchart LR
   npm test
   ```
 - **UI tests only** (Use Cases 1 & 2):
-  ```bash
-  npm run test:ui
+```bash
+npm run test:ui
   ```
 - **API tests only** (Use Case 3):
   ```bash
-  npm run test:api
-  ```
+npm run test:api
+```
 
 Each UI spec uses the **POM classes** under `src/pages` and asserts:
 - **UI element visibility and interaction**
