@@ -1,0 +1,53 @@
+# Page snapshot
+
+```yaml
+- generic [ref=e4]:
+  - banner
+  - generic [ref=e6]:
+    - generic [ref=e7]:
+      - img "Automation Anywhere"
+      - button " English " [ref=e10] [cursor=pointer]:
+        - generic:
+          - generic: 
+        - generic [ref=e12]: English
+        - generic:
+          - generic: 
+    - generic [ref=e16]:
+      - generic [ref=e17]: Log in
+      - generic [ref=e23]:
+        - generic [ref=e27]:
+          - banner [ref=e28]:
+            - generic [ref=e29]:
+              - generic [ref=e30]:
+                - img [ref=e31]
+                - generic [ref=e34]: 
+              - generic [ref=e35]: User Logged Out
+          - generic [ref=e36]:
+            - paragraph [ref=e37]: You have been logged out. Please log in again.
+            - paragraph [ref=e38]: "Code: UM1121"
+        - generic [ref=e39]:
+          - generic [ref=e40]:
+            - generic [ref=e43]:
+              - generic [ref=e46]: Username
+              - generic [ref=e49]:
+                - region "Keyboard focus boundary"
+                - textbox "Username" [ref=e50]
+            - generic [ref=e53]:
+              - generic [ref=e56]: Password
+              - generic [ref=e58]:
+                - generic [ref=e59]:
+                  - region "Keyboard focus boundary"
+                  - textbox "Password" [ref=e60]
+                - button "" [ref=e63] [cursor=pointer]:
+                  - generic [ref=e64]: 
+          - generic [ref=e69]:
+            - region "Keyboard focus boundary"
+            - checkbox "Remember my username":
+              - checkbox "Keyboard focus boundary Remember my username Remember my username" [disabled]
+            - generic [ref=e70]: Remember my username
+          - generic [ref=e71]:
+            - button "Log in" [ref=e75]:
+              - generic [ref=e77]: Log in
+            - button "Forgot password?" [ref=e81]:
+              - generic [ref=e83]: Forgot password?
+```

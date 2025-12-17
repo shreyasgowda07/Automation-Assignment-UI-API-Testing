@@ -1,0 +1,320 @@
+# Page snapshot
+
+```yaml
+- generic [ref=e1]:
+  - generic [ref=e3]:
+    - generic [ref=e4]:
+      - banner
+      - generic [ref=e5]:
+        - navigation [ref=e7]:
+          - img "Community Edition"
+          - img "Community Edition"
+          - img "Community Edition"
+          - navigation [ref=e8]:
+            - list [ref=e9]:
+              - listitem [ref=e10]:
+                - link "Explore" [ref=e11] [cursor=pointer]:
+                  - /url: "#/home"
+                  - generic "Explore" [ref=e14]: 
+                  - generic [ref=e15]: Explore
+              - listitem [ref=e16]:
+                - link "Home" [ref=e17] [cursor=pointer]:
+                  - /url: "#/dashboard"
+                  - generic "Home" [ref=e20]: 
+                  - generic [ref=e21]: Home
+              - listitem [ref=e22]:
+                - link "Automation" [ref=e23] [cursor=pointer]:
+                  - /url: "#/bots/repository"
+                  - generic "Automation" [ref=e26]: 
+                  - generic [ref=e27]: Automation
+              - listitem [ref=e28]:
+                - button "AI" [ref=e29] [cursor=pointer]:
+                  - generic [ref=e32]: 
+                  - generic [ref=e34]: 
+                  - generic [ref=e35]: AI
+                - list:
+                  - listitem [ref=e36]:
+                    - link "Document Automation" [ref=e37] [cursor=pointer]:
+                      - /url: "#/modules/cognitive/iqbot/pages/learning-instances"
+                      - generic [ref=e39]: Document Automation
+              - listitem [ref=e40]:
+                - button "Activity" [ref=e41] [cursor=pointer]:
+                  - generic [ref=e44]: 
+                  - generic "Activity" [ref=e46]: 
+                  - generic [ref=e47]: Activity
+                - list:
+                  - listitem [ref=e48]:
+                    - link "In progress" [ref=e49] [cursor=pointer]:
+                      - /url: "#/activity/inprogress"
+                      - generic [ref=e51]: In progress
+                  - listitem [ref=e52]:
+                    - link "Historical" [ref=e53] [cursor=pointer]:
+                      - /url: "#/activity/historical"
+                      - generic [ref=e55]: Historical
+                  - listitem [ref=e56]
+                  - listitem [ref=e57]:
+                    - link "Insights" [ref=e58] [cursor=pointer]:
+                      - /url: /botinsight/
+                      - generic [ref=e60]: Insights
+                      - generic "Open in new window" [ref=e61]: 
+              - listitem [ref=e62]:
+                - button "Manage" [ref=e63] [cursor=pointer]:
+                  - generic [ref=e66]: 
+                  - generic "Manage" [ref=e68]: 
+                  - generic [ref=e69]: Manage
+                - list:
+                  - listitem [ref=e70]:
+                    - link "Devices" [ref=e71] [cursor=pointer]:
+                      - /url: "#/devices/mydevices"
+                      - generic [ref=e73]: Devices
+                  - listitem [ref=e74]
+                  - listitem [ref=e75]:
+                    - link "Global values" [ref=e76] [cursor=pointer]:
+                      - /url: "#/bots/globalvalues"
+                      - generic [ref=e78]: Global values
+                  - listitem [ref=e79]:
+                    - link "Credentials" [ref=e80] [cursor=pointer]:
+                      - /url: "#/bots/credentials"
+                      - generic [ref=e82]: Credentials
+                  - listitem [ref=e83]:
+                    - link "Packages" [ref=e84] [cursor=pointer]:
+                      - /url: "#/bots/packages"
+                      - generic [ref=e86]: Packages
+              - listitem [ref=e87]:
+                - button "Administration" [ref=e88] [cursor=pointer]:
+                  - generic [ref=e91]: 
+                  - generic "Administration" [ref=e93]: 
+                  - generic [ref=e94]: Administration
+                - list:
+                  - listitem [ref=e95]:
+                    - link "Users" [ref=e96] [cursor=pointer]:
+                      - /url: "#/admin/users"
+                      - generic [ref=e98]: Users
+          - navigation [ref=e99]:
+            - button "MC manjunathkg4433@gmail.com" [ref=e102] [cursor=pointer]:
+              - generic [ref=e106]: MC
+              - generic [ref=e107]: manjunathkg4433@gmail.com
+            - generic [ref=e108]:
+              - button "Collapse" [expanded] [ref=e109] [cursor=pointer]
+              - button "" [ref=e111] [cursor=pointer]:
+                - generic [ref=e112]:
+                  - generic "Help center": 
+              - button "Device Settings" [ref=e114] [cursor=pointer]:
+                - generic [ref=e115]:
+                  - img "Device Settings":
+                    - generic: 
+                    - generic:
+                      - generic:
+                        - img
+        - generic [ref=e116]:
+          - banner [ref=e117]:
+            - generic [ref=e118]:
+              - generic [ref=e120]: 
+              - generic [ref=e121]:
+                - link "Upgrade to Enterprise" [ref=e122]:
+                  - /url: https://info.automationanywhere.com/community-edition-upgrade.html
+                - generic "Open in new window" [ref=e123]: 
+                - text: Advanced automation capabilities to unleash your organization’s full potential.
+              - generic [ref=e125] [cursor=pointer]: 
+          - main [ref=e127]:
+            - heading "Automation Create Manage" [level=1] [ref=e129]:
+              - generic [ref=e130]:
+                - generic [ref=e132]: Automation
+                - generic [ref=e134]:
+                  - generic:
+                    - generic:
+                      - button "Create" [active] [ref=e138] [cursor=pointer]:
+                        - generic:
+                          - generic: 
+                        - generic [ref=e140]: Create
+                        - generic:
+                          - generic: 
+                      - button "Manage" [ref=e144] [cursor=pointer]:
+                        - generic:
+                          - generic: 
+                        - generic [ref=e146]: Manage
+                        - generic:
+                          - generic: 
+                  - generic:
+                    - generic:
+                      - generic:
+                        - generic:
+                          - button:
+                            - generic: 
+            - generic [ref=e150]:
+              - generic [ref=e152]:
+                - generic [ref=e153]:
+                  - generic [ref=e155]: Folders
+                  - region "Keyboard focus boundary"
+                  - button "Refresh folders" [ref=e156] [cursor=pointer]:
+                    - generic [ref=e157]: 
+                - generic "Bots" [ref=e158]:
+                  - generic [ref=e160]:
+                    - region "Keyboard focus boundary"
+                    - button "" [ref=e161] [cursor=pointer]:
+                      - generic [ref=e162]: 
+                  - button " Bots" [ref=e163]:
+                    - generic [ref=e166]: 
+                    - generic [ref=e168]: Bots
+                  - generic [ref=e170]:
+                    - region "Keyboard focus boundary"
+                    - button "Create subfolder…" [ref=e171] [cursor=pointer]:
+                      - generic [ref=e172]: 
+                - generic "Bot Store" [ref=e173]:
+                  - button " Bot Store" [ref=e175] [cursor=pointer]:
+                    - generic [ref=e178]: 
+                    - generic [ref=e180]: Bot Store
+              - generic [ref=e182]:
+                - region "Keyboard focus boundary"
+                - button [ref=e183]
+              - generic [ref=e185]:
+                - generic [ref=e187] [cursor=pointer]:
+                  - region "Keyboard focus boundary"
+                  - checkbox "Search within subfolders" [checked]:
+                    - checkbox "Keyboard focus boundary Search within subfolders Search within subfolders" [checked]
+                    - generic: 
+                  - generic [ref=e188]: Search within subfolders
+                - generic [ref=e189]:
+                  - generic [ref=e191]:
+                    - generic [ref=e192]:
+                      - region "Keyboard focus boundary"
+                      - region "Keyboard focus boundary" [ref=e193]
+                      - generic [ref=e195] [cursor=pointer]:
+                        - textbox [ref=e198]
+                        - generic [ref=e205]: Name
+                        - button "" [ref=e207]:
+                          - generic [ref=e208]: 
+                    - textbox "Search" [ref=e212]
+                  - generic [ref=e213]:
+                    - region "Files and folders" [ref=e214]:
+                      - generic [ref=e215]:
+                        - generic [ref=e217]: Files and folders
+                        - generic [ref=e219]: (3)
+                        - region "Keyboard focus boundary"
+                        - button "Create" [ref=e220] [cursor=pointer]:
+                          - generic [ref=e221]: 
+                        - region "Keyboard focus boundary"
+                        - button "Upload files…" [ref=e222] [cursor=pointer]:
+                          - generic [ref=e223]: 
+                        - region "Keyboard focus boundary"
+                        - button "Delete checked items…" [ref=e224] [cursor=pointer]:
+                          - generic [ref=e225]: 
+                        - region "Keyboard focus boundary"
+                        - button "Refresh" [ref=e226] [cursor=pointer]:
+                          - generic [ref=e227]: 
+                        - region "Keyboard focus boundary"
+                        - button "Show" [ref=e228] [cursor=pointer]:
+                          - generic [ref=e229]: 
+                        - region "Keyboard focus boundary"
+                        - button "Customize columns" [ref=e230] [cursor=pointer]:
+                          - generic [ref=e231]: 
+                    - generic [ref=e233]:
+                      - generic [ref=e235]:
+                        - generic [ref=e240] [cursor=pointer]:
+                          - region "Keyboard focus boundary"
+                          - checkbox "Select all":
+                            - checkbox "Select all"
+                        - generic [ref=e244] [cursor=pointer]:
+                          - generic [ref=e246]: Type
+                          - generic [ref=e248]: 
+                        - generic [ref=e252] [cursor=pointer]:
+                          - generic [ref=e254]: Name
+                          - generic [ref=e256]: 
+                        - generic [ref=e262]: Folder path
+                        - generic [ref=e268] [cursor=pointer]: Status
+                        - generic [ref=e274]: Platform
+                        - generic [ref=e280]: Size
+                        - generic [ref=e286] [cursor=pointer]: Last modified
+                        - generic [ref=e292]: Modified by
+                      - generic [ref=e297]:
+                        - generic [ref=e298]:
+                          - generic [ref=e302] [cursor=pointer]:
+                            - region "Keyboard focus boundary"
+                            - checkbox "Select row":
+                              - checkbox "Select row"
+                          - generic [ref=e305]:
+                            - generic:
+                              - generic: 
+                            - generic [ref=e308]: Folder
+                          - link "Document Workspace Processes" [ref=e311] [cursor=pointer]:
+                            - /url: "#/bots/repository/private/folders/32125369"
+                          - generic [ref=e315]: Bots
+                          - generic [ref=e319]: N/A
+                          - generic [ref=e323]: N/A
+                          - generic [ref=e327]: N/A
+                          - generic "16:04:20 IST 2025-12-17" [ref=e330]: 1 hour ago
+                          - generic "manjunathkg4433@gmail.com" [ref=e333]:
+                            - generic [ref=e335]: MC
+                            - generic [ref=e337]: manjunathkg4433@gmail.com
+                          - button "Actions" [ref=e339] [cursor=pointer]:
+                            - generic [ref=e340]: 
+                        - generic [ref=e341]:
+                          - generic [ref=e345] [cursor=pointer]:
+                            - region "Keyboard focus boundary"
+                            - checkbox "Select row":
+                              - checkbox "Select row"
+                          - generic [ref=e348]:
+                            - generic:
+                              - generic: 
+                            - generic [ref=e351]: Folder
+                          - link "Sample bots" [ref=e354] [cursor=pointer]:
+                            - /url: "#/bots/repository/private/folders/32125368"
+                          - generic [ref=e358]: Bots
+                          - generic [ref=e362]: N/A
+                          - generic [ref=e366]: N/A
+                          - generic [ref=e370]: N/A
+                          - generic "16:04:20 IST 2025-12-17" [ref=e373]: 1 hour ago
+                          - generic "manjunathkg4433@gmail.com" [ref=e376]:
+                            - generic [ref=e378]: MC
+                            - generic [ref=e380]: manjunathkg4433@gmail.com
+                          - button "Actions" [ref=e382] [cursor=pointer]:
+                            - generic [ref=e383]: 
+                        - generic [ref=e384]:
+                          - generic [ref=e388] [cursor=pointer]:
+                            - region "Keyboard focus boundary"
+                            - checkbox "Select row":
+                              - checkbox "Select row"
+                          - generic [ref=e391]:
+                            - generic:
+                              - generic: 
+                            - generic [ref=e394]: Task Bot
+                          - link "Message Box Task (UI Automation)" [ref=e397] [cursor=pointer]:
+                            - /url: "#/bots/repository/private/files/task/32125488/edit"
+                          - generic [ref=e401]: Bots
+                          - generic [ref=e405]: New
+                          - generic [ref=e409]: Windows
+                          - generic [ref=e413]: 959 Bytes
+                          - generic "16:24:57 IST 2025-12-17" [ref=e416]: 43 minutes ago
+                          - generic "manjunathkg4433@gmail.com" [ref=e419]:
+                            - generic [ref=e421]: MC
+                            - generic [ref=e423]: manjunathkg4433@gmail.com
+                          - button "Actions" [ref=e425] [cursor=pointer]:
+                            - generic [ref=e426]: 
+                  - navigation [ref=e427]:
+                    - list
+                    - generic [ref=e428]:
+                      - generic "per page" [ref=e430]:
+                        - region "Keyboard focus boundary"
+                        - region "Keyboard focus boundary" [ref=e431]
+                        - generic [ref=e433] [cursor=pointer]:
+                          - textbox [ref=e436]
+                          - generic [ref=e443]: "100"
+                          - button "" [ref=e445]:
+                            - generic [ref=e446]: 
+                      - generic [ref=e447]: per page
+    - generic [ref=e449]:
+      - region "Keyboard focus boundary"
+      - generic [ref=e452]:
+        - button " Process…" [ref=e453] [cursor=pointer]:
+          - generic [ref=e455]: 
+          - generic [ref=e456]: Process…
+        - button " Task Bot…" [ref=e457] [cursor=pointer]:
+          - generic [ref=e459]: 
+          - generic [ref=e460]: Task Bot…
+        - button " Form…" [ref=e461] [cursor=pointer]:
+          - generic [ref=e463]: 
+          - generic [ref=e464]: Form…
+      - region "Keyboard focus boundary"
+  - button "Open Resource Center, 5 new notification" [ref=e465] [cursor=pointer]:
+    - generic [ref=e467]: "5"
+```
