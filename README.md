@@ -53,38 +53,32 @@ You must register your own Community Edition account and use your own credential
 
 ---
 
-## High-level architecture (mind map style)
+## High-level architecture (overview)
 
 Conceptual view of how the pieces fit together:
 
-```mermaid
-flowchart TD
-  Root[AA Automation Framework]
-
-  Root --> UI[UI Automation]
-  Root --> API[API Automation]
-  Root --> CFG[Configuration]
-  Root --> RPT[Reports]
-
-  UI --> UITests[UI tests (tests/ui)]
-  UITests --> MsgSpec[messagebox.spec.ts]
-  UITests --> FormSpec[form.spec.ts]
-  UI --> Pages[Page Objects (src/pages)]
-  Pages --> Login[LoginPage]
-  Pages --> MsgPage[MessageBoxPage]
-  Pages --> FormPage[FormPage]
-  Pages --> Base[BasePage]
-
-  API --> APITests[API tests (tests/api)]
-  APITests --> LearnSpec[learningInstance.spec.ts]
-  API --> ApiClientNode[ApiClient (src/api/apiClient.ts)]
-
-  CFG --> EnvFile[.env (URLs, creds, token)]
-  CFG --> PWConfig[playwright.config.ts]
-  CFG --> TestCfg[test-config.js]
-
-  RPT --> PWReport[playwright-report]
-  RPT --> TR[test-results]
+```text
+AA Automation Framework
+├─ UI Automation
+│  ├─ UI tests (tests/ui)
+│  │  ├─ messagebox.spec.ts
+│  │  └─ form.spec.ts
+│  └─ Page Objects (src/pages)
+│     ├─ LoginPage
+│     ├─ MessageBoxPage
+│     ├─ FormPage
+│     └─ BasePage
+├─ API Automation
+│  ├─ API tests (tests/api)
+│  │  └─ learningInstance.spec.ts
+│  └─ ApiClient (src/api/apiClient.ts)
+├─ Configuration
+│  ├─ .env (URLs, credentials, token)
+│  ├─ playwright.config.ts
+│  └─ test-config.js
+└─ Reports
+   ├─ playwright-report
+   └─ test-results
 ```
 
 Reading this from the center out:
@@ -99,49 +93,29 @@ Reading this from the center out:
 
 At a high level, the framework is a small test system with clear layers:
 
-```mermaid
-flowchart LR
-  subgraph Runner[Playwright Test Runner]
-    TUI[UI Specs (tests/ui/*)]
-    TAPI[API Specs (tests/api/*)]
-  end
+```text
+Playwright Test Runner
+├─ UI Specs (tests/ui/*)
+│  ├─ messagebox.spec.ts
+│  └─ form.spec.ts
+├─ API Specs (tests/api/*)
+│  └─ learningInstance.spec.ts
+└─ Uses configuration from:
+   ├─ .env (UI_BASE_URL, API_BASE_URL, creds, token)
+   └─ playwright.config.ts
 
-  subgraph UI[UI Layer]
-    POLogin[LoginPage.ts]
-    POMessage[MessageBoxPage.ts]
-    POForm[FormPage.ts]
-    POBase[BasePage.ts]
-  end
+UI Layer (browser automation)
+├─ LoginPage.ts
+├─ MessageBoxPage.ts
+├─ FormPage.ts
+└─ BasePage.ts
 
-  subgraph API[API Layer]
-    Client[ApiClient.ts (Axios wrapper)]
-  end
+API Layer (HTTP calls)
+└─ ApiClient.ts (Axios wrapper)
 
-  subgraph Config[Configuration]
-    Env[.env (UI_BASE_URL, API_BASE_URL, creds, token)]
-    PWCfg[playwright.config.ts]
-  end
-
-  subgraph Target[Automation Anywhere Cloud]
-    UIApp[Web UI (Community Edition)]
-    REST[Learning Instance APIs]
-  end
-
-  TUI --> POLogin
-  TUI --> POMessage
-  TUI --> POForm
-
-  TAPI --> Client
-
-  POLogin --> UIApp
-  POMessage --> UIApp
-  POForm --> UIApp
-
-  Client --> REST
-
-  Env --> Runner
-  Env --> Client
-  PWCfg --> Runner
+Target system
+├─ Automation Anywhere Web UI (Community Edition)
+└─ Learning Instance REST APIs
 ```
 
 **Design principles:**
@@ -236,46 +210,46 @@ The API spec asserts:
 
 ### UI flows (Use Cases 1 & 2)
 
-```mermaid
-flowchart TD
-  A[Start Playwright test] --> B[Load UI_BASE_URL]
-  B --> C[LoginPage.login(UI_USERNAME, UI_PASSWORD)]
-  C --> D[LoginPage.expectLoggedIn()]
+```text
+Start Playwright test
+  -> Load UI_BASE_URL
+  -> LoginPage.login(UI_USERNAME, UI_PASSWORD)
+  -> LoginPage.expectLoggedIn()
 
-  %% Use Case 1: Message Box Task
-  D --> E1[MessageBoxPage.navigateToAutomation()]
-  E1 --> F1[openCreateTaskBot()]
-  F1 --> G1[fillTaskDetails()]
-  G1 --> H1[addMessageBoxAction()]
-  H1 --> I1[verifyRightPanelElements()]
-  I1 --> J1[configureMessageBox()]
-  J1 --> K1[saveConfiguration()]
-  K1 --> L1[Assert task visible in list]
+Use Case 1: Message Box Task
+  -> MessageBoxPage.navigateToAutomation()
+  -> openCreateTaskBot()
+  -> fillTaskDetails()
+  -> addMessageBoxAction()
+  -> verifyRightPanelElements()
+  -> configureMessageBox()
+  -> saveConfiguration()
+  -> Assert task visible in list
 
-  %% Use Case 2: Form with Upload
-  D --> E2[FormPage.navigateToAutomation()]
-  E2 --> F2[openCreateForm()]
-  F2 --> G2[fillFormDetails()]
-  G2 --> H2[dragDropTextbox() & dragDropSelectFile()]
-  H2 --> I2[clickElementAndVerifyRightPanel()]
-  I2 --> J2[enterTextInTextbox()]
-  J2 --> K2[uploadDocument(sample.txt)]
-  K2 --> L2[saveForm()]
-  L2 --> M2[Assert form & uploaded file visible]
+Use Case 2: Form with Upload
+  -> FormPage.navigateToAutomation()
+  -> openCreateForm()
+  -> fillFormDetails()
+  -> dragDropTextbox() and dragDropSelectFile()
+  -> clickElementAndVerifyRightPanel()
+  -> enterTextInTextbox()
+  -> uploadDocument(sample.txt)
+  -> saveForm()
+  -> Assert form and uploaded file visible
 ```
 
 ### API flow (Use Case 3)
 
-```mermaid
-flowchart TD
-  A[Start API test] --> B[Create ApiClient(API_BASE_URL, API_TOKEN)]
-  B --> C[Optional: Verify auth via GET /learning-instances]
-  C --> D[POST /learning-instances with payload]
-  D --> E[Measure status code and response time]
-  E --> F[Validate response body: id, name, status, timestamps]
-  F --> G[GET /learning-instances/{id}]
-  G --> H[Assert fetched instance matches created instance]
-  H --> I[Finish test]
+```text
+Start API test
+  -> Create ApiClient with API_BASE_URL and API_TOKEN
+  -> (Optional) Verify auth via GET learning-instances
+  -> POST learning-instances with payload
+  -> Measure status code and response time
+  -> Validate response body: id, name, status, timestamps
+  -> GET learning-instances by id
+  -> Assert fetched instance matches created instance
+  -> Finish test
 ```
 
 ---
