@@ -53,6 +53,103 @@ You must register your own Community Edition account and use your own credential
 
 ---
 
+## High-level architecture (mind map style)
+
+Conceptual view of how the pieces fit together:
+
+```mermaid
+mindmap
+  root((AA Automation Framework))
+    UI Automation
+      Playwright Test Runner
+      tests/ui/messagebox.spec.ts
+      tests/ui/form.spec.ts
+      Page Objects
+        LoginPage
+        MessageBoxPage
+        FormPage
+        BasePage
+    API Automation
+      tests/api/learningInstance.spec.ts
+      ApiClient (Axios wrapper)
+    Configuration
+      .env
+        UI_BASE_URL
+        UI_USERNAME
+        UI_PASSWORD
+        API_BASE_URL
+        API_TOKEN
+      playwright.config.ts
+      test-config.js
+    Reports
+      playwright-report
+      test-results
+```
+
+Reading this from the center out:
+- **Tests** drive the flows (UI specs and API specs).
+- **Page Objects** and **ApiClient** encapsulate interaction details.
+- **Configuration** wires tests to your actual Automation Anywhere tenant.
+- **Reports** capture what happened after each run.
+
+---
+
+## System design (component view)
+
+At a high level, the framework is a small test system with clear layers:
+
+```mermaid
+flowchart LR
+  subgraph Runner[Playwright Test Runner]
+    TUI[UI Specs<br/>tests/ui/*]
+    TAPI[API Specs<br/>tests/api/*]
+  end
+
+  subgraph UI[UI Layer]
+    POLogin[LoginPage.ts]
+    POMessage[MessageBoxPage.ts]
+    POForm[FormPage.ts]
+    POBase[BasePage.ts]
+  end
+
+  subgraph API[API Layer]
+    Client[ApiClient.ts<br/>(Axios wrapper)]
+  end
+
+  subgraph Config[Configuration]
+    Env[.env<br/>UI_BASE_URL, API_BASE_URL, creds, token]
+    PWCfg[playwright.config.ts]
+  end
+
+  subgraph Target[Automation Anywhere Cloud]
+    UIApp[Web UI<br/>(Community Edition)]
+    REST[Learning Instance APIs]
+  end
+
+  TUI --> POLogin
+  TUI --> POMessage
+  TUI --> POForm
+
+  TAPI --> Client
+
+  POLogin --> UIApp
+  POMessage --> UIApp
+  POForm --> UIApp
+
+  Client --> REST
+
+  Env --> Runner
+  Env --> Client
+  PWCfg --> Runner
+```
+
+**Design principles:**
+- **Separation of concerns**: Specs describe scenarios; page objects / `ApiClient` handle low-level interactions.
+- **Configurability**: Environment-specific details live in `.env`, so the same code can run against different tenants.
+- **Reusability**: Common logic is centralized in `BasePage` and `ApiClient`.
+
+---
+
 ## Environment / configuration notes
 
 - **Environment variables** (loaded by `dotenv`):
@@ -75,16 +172,26 @@ You must register your own Community Edition account and use your own credential
      - `UI_BASE_URL`, `UI_USERNAME`, `UI_PASSWORD`
      - `API_BASE_URL`, `API_TOKEN`
 3. **Install Node.js** (if not already installed)
-   - On macOS, for example:
-   ```bash
-   brew install node
-   ```
+   - **macOS (example)**:
+     ```bash
+     brew install node
+     ```
+   - **Windows (example)**:
+     - Install **Node.js LTS** from the official website (`https://nodejs.org`).
+     - During installation, allow it to add Node and npm to your `PATH`.
 4. **Install project dependencies and Playwright browsers**
-   ```bash
-   cd "/Users/manjunathkg/Documents/Source Code/Automation Assignment – UI & API Testing"
-   npm install
-   npx playwright install
-   ```
+   - macOS / Linux:
+     ```bash
+     cd "/Users/manjunathkg/Documents/Source Code/Automation Assignment – UI & API Testing"
+     npm install
+     npx playwright install
+     ```
+   - Windows (PowerShell or Command Prompt):
+     ```bash
+     cd "C:\path\to\Automation Assignment – UI & API Testing"
+     npm install
+     npx playwright install
+     ```
 
 ### Local-only npm usage (no global installs required)
 
@@ -121,6 +228,54 @@ The API spec asserts:
 - **Response time** (bounded by a maximum threshold)
 - **Response body schema and field‑level correctness**
 - **Functional accuracy** by validating the created Learning Instance via a follow‑up `GET` call.
+
+---
+
+## End‑to‑end flows (flow charts)
+
+### UI flows (Use Cases 1 & 2)
+
+```mermaid
+flowchart TD
+  A[Start Playwright test] --> B[Load UI_BASE_URL]
+  B --> C[LoginPage.login(UI_USERNAME, UI_PASSWORD)]
+  C --> D[LoginPage.expectLoggedIn()]
+
+  %% Use Case 1: Message Box Task
+  D --> E1[MessageBoxPage.navigateToAutomation()]
+  E1 --> F1[openCreateTaskBot()]
+  F1 --> G1[fillTaskDetails()]
+  G1 --> H1[addMessageBoxAction()]
+  H1 --> I1[verifyRightPanelElements()]
+  I1 --> J1[configureMessageBox()]
+  J1 --> K1[saveConfiguration()]
+  K1 --> L1[Assert task visible in list]
+
+  %% Use Case 2: Form with Upload
+  D --> E2[FormPage.navigateToAutomation()]
+  E2 --> F2[openCreateForm()]
+  F2 --> G2[fillFormDetails()]
+  G2 --> H2[dragDropTextbox() & dragDropSelectFile()]
+  H2 --> I2[clickElementAndVerifyRightPanel()]
+  I2 --> J2[enterTextInTextbox()]
+  J2 --> K2[uploadDocument(sample.txt)]
+  K2 --> L2[saveForm()]
+  L2 --> M2[Assert form & uploaded file visible]
+```
+
+### API flow (Use Case 3)
+
+```mermaid
+flowchart TD
+  A[Start API test] --> B[Create ApiClient(API_BASE_URL, API_TOKEN)]
+  B --> C[Optional: Verify auth via GET /learning-instances]
+  C --> D[POST /learning-instances with payload]
+  D --> E[Measure status code and response time]
+  E --> F[Validate response body: id, name, status, timestamps]
+  F --> G[GET /learning-instances/{id}]
+  G --> H[Assert fetched instance matches created instance]
+  H --> I[Finish test]
+```
 
 ---
 
